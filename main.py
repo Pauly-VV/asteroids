@@ -27,6 +27,7 @@ def main():
         #filling black screen, drawing player and refreshing every loop
         pygame.Surface.fill(screen, (0,0,0))
         player.draw(screen)
+        player.update(dt)
         pygame.display.flip()        
 
         #limiting framerate
