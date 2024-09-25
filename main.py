@@ -14,19 +14,27 @@ def main():
     clock = pygame.time.Clock()
     #clock timer variable
     dt = 0
+    #create groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    #add player to groups
+    Player.containers = (updatable, drawable)
     #spawn player
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+    
 
     while True:
         #enabling quit button
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-            
-        player.update(dt)
+        
+        for object in updatable:
+            object.update(dt)
         #filling black screen, drawing player and refreshing every loop
         pygame.Surface.fill(screen, (0,0,0))
-        player.draw(screen)
+        for object in drawable:
+            object.draw(screen)
         pygame.display.flip()        
 
         #limiting framerate
