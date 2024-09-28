@@ -24,10 +24,11 @@ def main():
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    wrappable = pygame.sprite.Group()
 
     #add objects to groups
-    Asteroid.containers = (asteroids, updatable, drawable)
-    Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable, wrappable)
+    Player.containers = (updatable, drawable, wrappable)
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
 
@@ -45,6 +46,10 @@ def main():
         #update objects
         for object in updatable:
             object.update(dt)
+
+        for object in wrappable:
+            object.wrap()
+            
 
         #check for collision between asteroids and player
         for asteroid in asteroids:
